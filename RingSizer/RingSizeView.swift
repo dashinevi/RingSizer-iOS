@@ -20,17 +20,17 @@ struct RingSizeView: View {
     var body: some View {
         VStack {
             Circle()
+                .stroke(.black)
                 .frame(width: diameter, height: diameter)
-                .foregroundColor(.black)
-            
+                .foregroundColor(.clear)
+            Text("\(diameterInMM, specifier: "%.2f") mm")
         }
         .frame(width: frameSize, height: frameSize)
-        .border(Color.black, width: 1)
+//        .border(Color.black, width: 1)
         VStack {
             Slider(value: $diameter, in: 60...180, step: 0.1)
                 .padding()
-            Text("Diameter: \(diameterInMM, specifier: "%.2f") mm")
-                .padding()
+            
         }
     }
 }
