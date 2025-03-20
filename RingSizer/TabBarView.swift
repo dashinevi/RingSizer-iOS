@@ -5,62 +5,52 @@
 //  Created by Diana Dashinevich on 11/03/2025.
 //
 import SwiftUI
+import TabBar
 
-enum Tab: String, CaseIterable, Identifiable {
-    case size
+enum Item: Int, Tabbable {
     case converter
+    case size
     case saved
-    
-    var id: String {rawValue}
-    
-    var name: String {
-        switch self {
-        case .size: return "Size"
-        case .converter: return "Converter"
-        case .saved: return "Saved"
-        }
-    }
     
     var icon: String {
         switch self {
-        case .size: return "arrow.up.left.and.arrow.down.right.circle"
         case .converter: return "arrow.left.arrow.right.circle"
+        case .size: return "arrow.up.left.and.arrow.down.right.circle"
         case .saved: return "heart.circle"
         }
     }
-}
-
-struct TabBarView: View {
-    @Binding var selectedTab: Tab
     
-    var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 30)
-            
-            HStack {
-                Button(Tab.size.name, systemImage: Tab.size.icon) {
-                    selectedTab = .size
-                }
-                .tint(selectedTab == .size ? .white : .gray)
-                Spacer()
-                Button(Tab.converter.name, systemImage: Tab.converter.icon) {
-                    selectedTab = .converter
-                }
-                .tint(selectedTab == .converter ? .white : .gray)
-                Spacer()
-                Button(Tab.saved.name, systemImage: Tab.saved.icon) {
-                    selectedTab = .saved
-                }
-                .tint(selectedTab == .saved ? .white : .gray)
-            }
-            .padding(.horizontal, 30)
+    var title: String {
+        switch self {
+        case .converter: return "Converter"
+        case .size: return "Size"
+        case .saved: return "Saved"
         }
-        .frame(width: .infinity, height: 60)
-        .padding(10)
     }
 }
 
-#Preview {
-    @Previewable @State var selectedTab: Tab = .size
-    return TabBarView(selectedTab: $selectedTab)
+struct CustomTabBarStyle: TabBarStyle {
+    func tabBar(with geometry: GeometryProxy, itemsContainer: @escaping () -> AnyView) -> some View {
+        HStack {
+            itemsContainer()
+                .padding(.vertical, 20)
+                .padding(.horizontal, 15)
+                .background(
+                    Capsule()
+                        .fill(.black)
+                )
+                .padding()
+        }
+    }
+}
+
+struct CustomTabItemStyle: TabItemStyle {
+    func tabItem(icon: String, title: String, isSelected: Bool) -> some View {
+        HStack {
+            Text(title)
+                .fontWeight(.regular)
+            Image(systemName: icon)
+        }
+        .foregroundColor(isSelected == true ? .white : .gray)
+    }
 }
