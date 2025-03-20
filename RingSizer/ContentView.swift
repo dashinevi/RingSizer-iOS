@@ -8,14 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var activeTab: Tab = .size
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ZStack (alignment: .bottom) {
+            VStack {
+                switch activeTab {
+                case .size:
+                    GetSizeView()
+                case .converter:
+                    ConverterView()
+                case .saved:
+                    RingSizeView()
+                }
+            }
+            .toolbar {
+                ToolbarItem(placement: .bottomBar) {
+                    TabBarView(selectedTab: $activeTab)
+                }
+            }
+            
         }
-        .padding()
     }
 }
 
