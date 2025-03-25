@@ -38,14 +38,18 @@ enum Country: String, CaseIterable {
     case israel = "Israel"
     
     case india = "India"
+    case saudiArabia = "Saudi Arabia"
+    case uae = "United Arab Emirates"
 }
 
 enum MeasurementSystem: String, CaseIterable {
     case us
     case swiss
+    case uk
     case jp
     case eu
     case india
+    case diameter
     
     init(country: Country) {
         switch country {
@@ -60,17 +64,19 @@ enum MeasurementSystem: String, CaseIterable {
         case .india:
             self = .india
         case .uk, .australia, .ireland, .newZealand, .southAfrica:
-            self = .us
+            self = .uk
+        case .saudiArabia, .uae:
+            self = .diameter
         }
     }
 }
 
-struct RingSize: Identifiable, Equatable {
+struct RingSize: Identifiable, Equatable, Hashable {
     let id = UUID()
     let diameterMM: Double // MM
     let diameterInches: Double // IN
-    let euSize: String // EU (ISO), France, Austria, Germany, Belgium, Norway, Sweden, Finland, Russia
-    let usSize: String // US, Canada, Mexico
+    let euSize: String? // EU (ISO), France, Austria, Germany, Belgium, Norway, Sweden, Finland, Russia
+    let usSize: String? // US, Canada, Mexico
     let ukSize: String? // UK, Australia, Ireland, New Zealand, South Africa
     let swissSize: String? // Switzerland, Italy, Spain, Netherlands
     let jpSize: String? // Japan, China, South America, Turkey, Israel
