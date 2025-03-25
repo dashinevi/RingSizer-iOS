@@ -6,17 +6,76 @@
 //
 import Foundation
 
+enum Country: String, CaseIterable {
+    case france = "France"
+    case austria = "Austria"
+    case germany = "Germany"
+    case belgium = "Belgium"
+    case norway = "Norway"
+    case sweden = "Sweden"
+    case finland = "Finland"
+    case russia = "Russia"
+    
+    case usa = "USA"
+    case mexico = "Mexico"
+    case canada = "Canada"
+    
+    case uk = "United Kingdom"
+    case australia = "Australia"
+    case ireland = "Ireland"
+    case newZealand = "New Zealand"
+    case southAfrica = "South Africa"
+    
+    case switzerland = "Switzerland"
+    case italy = "Italy"
+    case spain = "Spain"
+    case netherlands = "Netherlands"
+    
+    case japan = "Japan"
+    case china = "China"
+    case southAmerica = "South America"
+    case turkey = "Turkey"
+    case israel = "Israel"
+    
+    case india = "India"
+}
+
+enum MeasurementSystem: String, CaseIterable {
+    case us
+    case swiss
+    case jp
+    case eu
+    case india
+    
+    init(country: Country) {
+        switch country {
+        case .usa, .mexico, .canada:
+            self = .us
+        case .switzerland, .italy, .spain, .netherlands:
+            self = .swiss
+        case .japan, .china, .southAmerica, .turkey, .israel:
+            self = .jp
+        case .france, .austria, .germany, .belgium, .norway, .sweden, .finland, .russia:
+            self = .eu
+        case .india:
+            self = .india
+        case .uk, .australia, .ireland, .newZealand, .southAfrica:
+            self = .us
+        }
+    }
+}
+
 struct RingSize: Identifiable, Equatable {
     let id = UUID()
     let diameterMM: Double // MM
     let diameterInches: Double // IN
-    let euSize: String // EU (ISO), France
+    let euSize: String // EU (ISO), France, Austria, Germany, Belgium, Norway, Sweden, Finland, Russia
     let usSize: String // US, Canada, Mexico
     let ukSize: String? // UK, Australia, Ireland, New Zealand, South Africa
     let swissSize: String? // Switzerland, Italy, Spain, Netherlands
     let jpSize: String? // Japan, China, South America, Turkey, Israel
     let inSize: String? // India
-
+    
     //MARK: - Based on Wikipedia data: https://en.wikipedia.org/wiki/Ring_size
     static let standardSizes: [RingSize] = [
         RingSize(diameterMM: 11.63, diameterInches: 0.458, euSize: "36.5", usSize: "0", ukSize: nil, swissSize: nil, jpSize: nil, inSize: nil),
