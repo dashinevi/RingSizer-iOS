@@ -54,9 +54,9 @@ struct RingSizeView: View {
                 
                 NavigationLink {
                     VStack(alignment: .leading) {
-                        Text("USA/Canada: \(selectedRingSize.usSize)")
+                        Text("USA/Canada: \(selectedRingSize.usSize ?? "-")")
                         Text("United Kingdom: \(selectedRingSize.ukSize ?? "-")")
-                        Text("France: \(selectedRingSize.euSize)")
+                        Text("France: \(selectedRingSize.euSize ?? "-")")
                         Text("Japan: \(selectedRingSize.jpSize ?? "-")")
                     }
                 } label: {
