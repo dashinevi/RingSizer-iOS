@@ -12,7 +12,8 @@ struct RingSizeView: View {
     
     let ringSizes: [RingSize] = RingSize.standardSizes
     
-    @State private var selectedIndex: Int = 0
+    @State private var selectedIndex: Int = 15
+    @State private var showSizeInfo = false
     
     var selectedRingSize: RingSize {
         ringSizes[selectedIndex]
@@ -51,19 +52,30 @@ struct RingSizeView: View {
                     )
                     .padding()
                 }
-                
-                NavigationLink {
-                    VStack(alignment: .leading) {
-                        Text("USA/Canada: \(selectedRingSize.usSize ?? "-")")
-                        Text("United Kingdom: \(selectedRingSize.ukSize ?? "-")")
-                        Text("France: \(selectedRingSize.euSize ?? "-")")
-                        Text("Japan: \(selectedRingSize.jpSize ?? "-")")
-                    }
-                } label: {
-                    Text("Show Size")
+                Button("Show Size") {
+                    showSize()
                 }
+                .padding()
+                
+                if showSizeInfo {
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text("US: \(selectedRingSize.usSize ?? "-")")
+                            Text("UK: \(selectedRingSize.ukSize ?? "-")")
+                            Text("EU: \(selectedRingSize.euSize ?? "-")")
+                            Text("JP: \(selectedRingSize.jpSize ?? "-")")
+                            Text("IT: \(selectedRingSize.swissSize ?? "-")")
+                        }
+                        Spacer()
+                    }
+                    .padding()
+                }
+                Spacer()
             }
         }
+    }
+    func showSize() {
+        showSizeInfo = true
     }
 }
 
