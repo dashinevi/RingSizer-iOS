@@ -7,6 +7,9 @@
 import Foundation
 
 enum Country: String, CaseIterable {
+    case saudiArabia = "Saudi Arabia"
+    case uae = "United Arab Emirates"
+    
     case france = "France"
     case austria = "Austria"
     case germany = "Germany"
@@ -38,8 +41,6 @@ enum Country: String, CaseIterable {
     case israel = "Israel"
     
     case india = "India"
-    case saudiArabia = "Saudi Arabia"
-    case uae = "United Arab Emirates"
 }
 
 enum MeasurementSystem: String, CaseIterable {
@@ -84,18 +85,6 @@ struct RingSize: Identifiable, Equatable, Hashable {
     
     //MARK: - Based on Wikipedia data: https://en.wikipedia.org/wiki/Ring_size
     static let standardSizes: [RingSize] = [
-        RingSize(diameterMM: 11.63, diameterInches: 0.458, euSize: "36.5", usSize: "0", ukSize: nil, swissSize: nil, jpSize: nil, inSize: nil),
-        RingSize(diameterMM: 11.84, diameterInches: 0.466, euSize: "37.2", usSize: "1/4", ukSize: nil, swissSize: nil, jpSize: nil, inSize: nil),
-        RingSize(diameterMM: 12.04, diameterInches: 0.474, euSize: "37.8", usSize: "1/2", ukSize: "A", swissSize: nil, jpSize: nil, inSize: nil),
-        RingSize(diameterMM: 12.24, diameterInches: 0.482, euSize: "38.5", usSize: "3/4", ukSize: "A 1/2", swissSize: nil, jpSize: nil, inSize: nil),
-        RingSize(diameterMM: 12.45, diameterInches: 0.49, euSize: "39.1", usSize: "1", ukSize: "B", swissSize: nil, jpSize: "1", inSize: nil),
-        RingSize(diameterMM: 12.65, diameterInches: 0.498, euSize: "39.7", usSize: "1 1/4", ukSize: "B 1/2", swissSize: nil, jpSize: nil, inSize: nil),
-        RingSize(diameterMM: 12.85, diameterInches: 0.506, euSize: "40.4", usSize: "1 1/2", ukSize: "C", swissSize: "0.4", jpSize: nil, inSize: nil),
-        RingSize(diameterMM: 13.06, diameterInches: 0.514, euSize: "41.0", usSize: "1 3/4", ukSize: "C 1/2", swissSize: "1", jpSize: nil, inSize: "1"),
-        RingSize(diameterMM: 13.26, diameterInches: 0.522, euSize: "41.7", usSize: "2", ukSize: "D", swissSize: "1.7", jpSize: "2", inSize: "2"),
-        RingSize(diameterMM: 13.46, diameterInches: 0.53, euSize: "42.3", usSize: "2 1/4", ukSize: "D 1/2", swissSize: "2.3", jpSize: nil, inSize: nil),
-        RingSize(diameterMM: 13.67, diameterInches: 0.538, euSize: "42.9", usSize: "2 1/2", ukSize: "E", swissSize: "2.9", jpSize: "3", inSize: "3"),
-        RingSize(diameterMM: 13.87, diameterInches: 0.546, euSize: "43.6", usSize: "2 3/4", ukSize: "E 1/2", swissSize: "3.6", jpSize: nil, inSize: "4"),
         RingSize(diameterMM: 14.07, diameterInches: 0.554, euSize: "44.2", usSize: "3", ukSize: "F", swissSize: "4.2", jpSize: "4", inSize: nil),
         RingSize(diameterMM: 14.27, diameterInches: 0.562, euSize: "44.8", usSize: "3 1/4", ukSize: "F 1/2", swissSize: "4.8", jpSize: "5", inSize: "5"),
         RingSize(diameterMM: 14.48, diameterInches: 0.57, euSize: "45.5", usSize: "3 1/2", ukSize: "G", swissSize: "5.5", jpSize: nil, inSize: nil),
