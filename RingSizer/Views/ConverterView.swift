@@ -16,25 +16,34 @@ struct ConverterView: View {
     
     var body: some View {
         VStack {
-            Picker("Select Country", selection: $selectedCountry) {
-                ForEach(countries, id: \.self) { country in
-                    Text(country.rawValue).tag(country)
+            Text("Converter")
+                .font(.title)
+                .fontWeight(.bold)
+            HStack {
+                Text("Select Country")
+                Spacer()
+                Picker("Select Country", selection: $selectedCountry) {
+                    ForEach(countries, id: \.self) { country in
+                        Text(country.rawValue).tag(country)
+                    }
                 }
+                .pickerStyle(.menu)
             }
-            .pickerStyle(MenuPickerStyle())
             
             let measurementSystem = MeasurementSystem(country: selectedCountry)
             let filteredSizes = ringSizes.filter { size in
                 isValidSize(for: size, measurementSystem: measurementSystem)
             }
-            
-            Picker("Select Ring Size", selection: $selectedRingSize) {
-                ForEach(filteredSizes, id: \.id) { size in
-                    Text(displaySize(for: size, measurementSystem: measurementSystem))
-                        .tag(size as RingSize?)
+            HStack {
+                Text("Select Ring Size")
+                Picker("Select Ring Size", selection: $selectedRingSize) {
+                    ForEach(filteredSizes, id: \.id) { size in
+                        Text(displaySize(for: size, measurementSystem: measurementSystem))
+                            .tag(size as RingSize?)
+                    }
                 }
+                .pickerStyle(.wheel)
             }
-            .pickerStyle(.wheel)
             
             Button("Convert") {
                 convertSize()
