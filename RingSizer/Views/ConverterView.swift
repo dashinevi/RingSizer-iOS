@@ -22,7 +22,6 @@ struct ConverterView: View {
                 }
             }
             .pickerStyle(MenuPickerStyle())
-            .padding()
             
             let measurementSystem = MeasurementSystem(country: selectedCountry)
             let filteredSizes = ringSizes.filter { size in
@@ -36,7 +35,6 @@ struct ConverterView: View {
                 }
             }
             .pickerStyle(.wheel)
-            .padding()
             
             Button("Convert") {
                 convertSize()
@@ -44,18 +42,24 @@ struct ConverterView: View {
             .padding()
             
             if !convertedSizes.isEmpty {
-                List(convertedSizes, id: \.id) { size in
+                HStack {
                     VStack (alignment: .leading) {
-                        Text("US: \(size.usSize ?? "-")")
-                        Text("EU: \(size.euSize ?? "-")")
-                        Text("UK: \(size.ukSize ?? "-")")
-                        Text("Swiss: \(size.swissSize ?? "-")")
-                        Text("JP: \(size.jpSize ?? "-")")
-                        Text("IN: \(size.inSize ?? "-")")
+                    ForEach(convertedSizes, id: \.id) { size in
+                            Text("US: \(size.usSize ?? "-")")
+                            Text("EU: \(size.euSize ?? "-")")
+                            Text("UK: \(size.ukSize ?? "-")")
+                            Text("IT: \(size.swissSize ?? "-")")
+                            Text("JP: \(size.jpSize ?? "-")")
+                            Text("IN: \(size.inSize ?? "-")")
+                        }
                     }
+                    Spacer()
                 }
+                .padding()
             }
+            Spacer()
         }
+        .padding()
     }
     
     func isValidSize(for size: RingSize, measurementSystem: MeasurementSystem) -> Bool {
