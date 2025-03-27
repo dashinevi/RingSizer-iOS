@@ -20,7 +20,7 @@ struct CustomSegmentedControl: View {
             ForEach(MeasurementWays.allCases, id: \.rawValue) { MeasurementWay in
                 Text(MeasurementWay.rawValue)
                     .font(.body)
-                    .foregroundStyle(.white)
+                    .foregroundColor(.white)
                     .padding(10)
                     .background {
                         ZStack {
@@ -37,8 +37,7 @@ struct CustomSegmentedControl: View {
         .padding(5)
         .background {
             RoundedRectangle(cornerRadius: 15)
-                .fill(.clear)
-                .stroke(.secondary, lineWidth: 1)
+                .stroke(Color.secondary, lineWidth: 1)
         }
     }
 }
