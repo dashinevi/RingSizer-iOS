@@ -57,27 +57,50 @@ struct RingSizeView: View {
                 }
                 .padding()
                 
-                if showSizeInfo {
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text("US: \(selectedRingSize.usSize ?? "-")")
-                            Text("UK: \(selectedRingSize.ukSize ?? "-")")
-                            Text("EU: \(selectedRingSize.euSize ?? "-")")
-                            Text("JP: \(selectedRingSize.jpSize ?? "-")")
-                            Text("IT: \(selectedRingSize.swissSize ?? "-")")
-                        }
-                        Spacer()
-                    }
-                    .padding()
+                .sheet(isPresented: $showSizeInfo) {
+                    sizeChartView()
                 }
-                Spacer()
             }
         }
+        
     }
     func showSize() {
         showSizeInfo = true
     }
 }
+    
+// MARK: file private methods
+    
+    private extension RingSizeView {
+        private func sizeChartView() -> some View {
+            HStack {
+                VStack(alignment: .leading) {
+                    Text("Diameter: \(selectedRingSize.diameterMM, specifier: "%.2f") mm")
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                    HStack {
+                        VStack (alignment: .leading) {
+                            Text("US: \(selectedRingSize.usSize ?? "-")")
+                            Text("UK: \(selectedRingSize.ukSize ?? "-")")
+                        }
+                        VStack (alignment: .leading) {
+                            Text("EU: \(selectedRingSize.euSize ?? "-")")
+                            Text("JP: \(selectedRingSize.jpSize ?? "-")")
+                        }
+                        VStack (alignment: .leading) {
+                            Text("IT: \(selectedRingSize.swissSize ?? "-")")
+                            Text("IN: \(selectedRingSize.inSize ?? "-")")
+                        }
+                    }
+                    .padding()
+                    .background {
+                        RoundedRectangle (cornerRadius: 20)
+                            .stroke(Color.black)
+                    }
+                }
+            }
+        }
+    }
 
 
 #Preview {
