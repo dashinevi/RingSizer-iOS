@@ -74,55 +74,58 @@ struct RingSizeView: View {
 private extension RingSizeView {
     private func sizeChartView() -> some View {
         HStack {
-            VStack(alignment: .leading) {
-                Text("Diameter: \(selectedRingSize.diameterMM, specifier: "%.2f") mm")
-                    .font(.title3)
-                    .fontWeight(.semibold)
-                VStack {
-                    HStack {
-                        Text("US:")
-                            .fontWeight(.semibold)
-                        Spacer()
-                        Text("\(selectedRingSize.usSize ?? "-")")
+            ZStack{
+                Image(.ringForSizes)
+                VStack(alignment: .leading) {
+                    Text("Diameter: \(selectedRingSize.diameterMM, specifier: "%.2f") mm")
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                    VStack {
+                        HStack {
+                            Text("US:")
+                                .fontWeight(.semibold)
+                            Spacer()
+                            Text("\(selectedRingSize.usSize ?? "-")")
+                        }
+                        HStack {
+                            Text("UK:")
+                                .fontWeight(.semibold)
+                            Spacer()
+                            Text("\(selectedRingSize.ukSize ?? "-")")
+                        }
+                        HStack {
+                            Text("EU:")
+                                .fontWeight(.semibold)
+                            Spacer()
+                            Text("\(selectedRingSize.euSize ?? "-")")
+                        }
+                        HStack {
+                            Text("JP:")
+                                .fontWeight(.semibold)
+                            Spacer()
+                            Text("\(selectedRingSize.jpSize ?? "-")")
+                        }
+                        HStack {
+                            Text("IT:")
+                                .fontWeight(.semibold)
+                            Spacer()
+                            Text("\(selectedRingSize.swissSize ?? "-")")
+                        }
+                        HStack {
+                            Text("IN:")
+                                .fontWeight(.semibold)
+                            Spacer()
+                            Text("\(selectedRingSize.inSize ?? "-")")
+                        }
                     }
-                    HStack {
-                        Text("UK:")
-                            .fontWeight(.semibold)
-                        Spacer()
-                        Text("\(selectedRingSize.ukSize ?? "-")")
-                    }
-                    HStack {
-                        Text("EU:")
-                            .fontWeight(.semibold)
-                        Spacer()
-                        Text("\(selectedRingSize.euSize ?? "-")")
-                    }
-                    HStack {
-                        Text("JP:")
-                            .fontWeight(.semibold)
-                        Spacer()
-                        Text("\(selectedRingSize.jpSize ?? "-")")
-                    }
-                    HStack {
-                        Text("IT:")
-                            .fontWeight(.semibold)
-                        Spacer()
-                        Text("\(selectedRingSize.swissSize ?? "-")")
-                    }
-                    HStack {
-                        Text("IN:")
-                            .fontWeight(.semibold)
-                        Spacer()
-                        Text("\(selectedRingSize.inSize ?? "-")")
+                    .padding()
+                    .background {
+                        RoundedRectangle (cornerRadius: 20)
+                            .stroke(Color.black)
                     }
                 }
-                .padding()
-                .background {
-                    RoundedRectangle (cornerRadius: 20)
-                        .stroke(Color.black)
-                }
+                .padding(50)
             }
-            .padding(50)
         }
     }
 }
