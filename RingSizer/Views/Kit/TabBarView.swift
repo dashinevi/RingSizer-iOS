@@ -37,7 +37,7 @@ struct CustomTabBarStyle: TabBarStyle {
                 .padding(.horizontal, 15)
                 .background(
                     Capsule()
-                        .fill(.black)
+                        .fill(.accent)
                 )
                 .padding()
         }
@@ -46,11 +46,11 @@ struct CustomTabBarStyle: TabBarStyle {
 
 struct CustomTabItemStyle: TabItemStyle {
     func tabItem(icon: String, title: String, isSelected: Bool) -> some View {
-        HStack {
+        VStack {
+            Image(systemName: icon)
             Text(title)
                 .fontWeight(.regular)
-            Image(systemName: icon)
         }
-        .foregroundColor(isSelected == true ? .white : .gray)
+        .foregroundColor(isSelected == true ? .white : .black.opacity(0.5))
     }
 }
