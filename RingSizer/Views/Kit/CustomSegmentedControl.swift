@@ -14,18 +14,19 @@ enum MeasurementWays: String, CaseIterable {
 struct CustomSegmentedControl: View {
     @Binding var selectedItem: MeasurementWays
     
-    
     var body: some View {
         HStack {
             ForEach(MeasurementWays.allCases, id: \.rawValue) { MeasurementWay in
                 Text(MeasurementWay.rawValue)
-                    .font(.body)
+                    .font(.title3)
+                    .fontWeight(.semibold)
                     .foregroundColor(.white)
-                    .padding(10)
+                    .padding(.vertical, 15)
+                    .padding(.horizontal, 35)
                     .background {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10)
-                                .fill(selectedItem == MeasurementWay ? Color.primary : Color.secondary)
+                                .fill(selectedItem == MeasurementWay ? Color.accent : Color.accent.opacity(0.3))
                         }
                         .animation(.bouncy, value: selectedItem)
                     }
@@ -34,10 +35,9 @@ struct CustomSegmentedControl: View {
                     }
             }
         }
-        .padding(5)
-        .background {
-            RoundedRectangle(cornerRadius: 15)
-                .stroke(Color.secondary, lineWidth: 1)
-        }
     }
+}
+
+#Preview {
+    CustomSegmentedControl(selectedItem: .constant(MeasurementWays.ByRing))
 }
