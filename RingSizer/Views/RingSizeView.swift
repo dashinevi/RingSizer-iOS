@@ -24,55 +24,84 @@ struct RingSizeView: View {
     }
     
     var body: some View {
-        NavigationStack {
-            VStack {
-                Text("Put the ring on the circle")
-                    .font(.title2)
-                
-                VStack {
-                    Circle()
-                        .stroke(.black, lineWidth: 1)
-                        .frame(width: diameter, height: diameter)
-                        .foregroundColor(.clear)
-                    
-                    Text("\(selectedRingSize.diameterMM, specifier: "%.2f") mm")
-                }
-                .frame(width: frameSize, height: frameSize)
-                
-                VStack {
-                    Slider(
-                        value: Binding(
-                            get: { Double(selectedIndex) },
-                            set: { newIndex in
-                                selectedIndex = min(max(0, Int(newIndex)), ringSizes.count - 1)
-                            }
-                        ),
-                        in: 0...Double(ringSizes.count - 1),
-                        step: 1
-                    )
+        VStack {
+            
+            ringView
+            
+            Button(action: {
+                showSize()
+            }) {
+                Text("Show the ring size")
+                    .foregroundColor(.white)
+                    .font(.title3)
+                    .fontWeight(.semibold)
                     .padding()
-                }
-                Button("Show Size") {
-                    showSize()
-                }
-                .padding()
-                
-                .sheet(isPresented: $showSizeInfo) {
-                    sizeChartView()
-                }
+                    .background(
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundColor(.accentColor)
+                    )
             }
+            .padding()
         }
-        
-    }
-    func showSize() {
-        showSizeInfo = true
+        .background(
+            RoundedRectangle(cornerRadius: 20)
+                .foregroundStyle(.ultraThinMaterial)
+        )
+        .sheet(isPresented: $showSizeInfo) {
+            sizeChartView
+        }
     }
 }
 
 // MARK: file private methods
 
 private extension RingSizeView {
-    private func sizeChartView() -> some View {
+    var ringView: some View {
+        VStack {
+            VStack {
+                Circle()
+                    .stroke(.accent, lineWidth: 2)
+                    .background(Circle().foregroundColor(Color.accent.opacity(0.2)))
+                    .frame(width: diameter, height: diameter)
+                Text("\(selectedRingSize.diameterMM, specifier: "%.2f") mm")
+            }
+            .frame(width: frameSize, height: frameSize)
+            HStack {
+                Button(action: {
+                        if selectedIndex > 0 {
+                            selectedIndex -= 1
+                        }
+                }) {
+                    Image(systemName: "minus.circle.fill")
+                    .font(.largeTitle)
+                }
+                .padding(.horizontal)
+
+                Slider(
+                    value: Binding(
+                        get: { Double(selectedIndex) },
+                        set: { newIndex in
+                            selectedIndex = min(max(0, Int(newIndex)), ringSizes.count - 1)
+                        }
+                    ),
+                    in: 0...Double(ringSizes.count - 1),
+                    step: 1
+                )
+                Button(action: {
+                        if selectedIndex < ringSizes.count - 1 {
+                            selectedIndex += 1
+                        }
+                    }) {
+                        Image(systemName: "plus.circle.fill")
+                            .font(.largeTitle)
+                    }
+                    .padding(.horizontal)
+            }
+            .padding()
+        }
+    }
+    
+    var sizeChartView: some View {
         HStack {
             ZStack{
                 Image(.ringForSizes)
@@ -127,6 +156,13 @@ private extension RingSizeView {
                 .padding(50)
             }
         }
+    }
+}
+
+// helpers
+private extension RingSizeView {
+    func showSize() {
+        showSizeInfo = true
     }
 }
 
