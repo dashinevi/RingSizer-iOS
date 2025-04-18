@@ -13,8 +13,9 @@ struct ContentView: View {
     @State private var visibility: TabBarVisibility = .visible
     
     var body: some View {
+        NavigationStack {
             TabBar(selection: $selection, visibility: $visibility) {
-                Text("Converter")
+                ConverterView()
                     .tabItem(for: Item.converter)
                 GetSizeView()
                     .tabItem(for: Item.size)
@@ -24,6 +25,7 @@ struct ContentView: View {
             .tabBar(style: CustomTabBarStyle())
             .tabItem(style: CustomTabItemStyle())
         }
+    }
 }
 
 #Preview {
